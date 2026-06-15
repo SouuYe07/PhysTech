@@ -3,7 +3,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: ['Konkhmer-Regular'],
+        body: ['Lexend-Bold']
+      }
+    },
   },
   plugins: [],
 }

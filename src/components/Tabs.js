@@ -7,16 +7,15 @@ import SessionSetup from "../navigation/SessionSetup.js";
 import Community from "../navigation/Community.js";
 import Profile from "../navigation/Profile.js";
 
-import HomeIcon from '../../assets/Home.svg';
-import ProgressIcon from '../../assets/Progress.svg';
-import CommunityIcon from '../../assets/Community.svg';
-import ProfileIcon from '../../assets/Profile.svg';
+import HomeIcon from '../../assets/nav-icons/Home.svg';
+import ProgressIcon from '../../assets/nav-icons/Progress.svg';
+import CommunityIcon from '../../assets/nav-icons/Community.svg';
+import ProfileIcon from '../../assets/nav-icons/Profile.svg';
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return(
-        // 2. Added ({ route }) here so your icon mapping can read the screen names!
         <Tab.Navigator screenOptions={({ route }) => ({ 
             headerShown: false,
             tabBarBackground: () => (
@@ -35,9 +34,9 @@ const Tabs = () => {
                 position: 'absolute',
                 height: 90,
                 paddingBottom: 2,
-                paddingTop: 5,
-                paddingLeft: 5,
-                paddingRight: 5,
+                paddingTop: 10,
+                paddingLeft: 15,
+                paddingRight: 15,
                 borderRadius: 25,
                 overflow: 'hidden'
             },
@@ -51,7 +50,7 @@ const Tabs = () => {
 
                 if (!IconComponent) return null;
 
-                return <IconComponent width={30} height={30} color={color} stroke={color} fill='none' />;
+                return <IconComponent width={28} height={28} color={color} stroke={color} fill='none' />;
             }
         })}>
 

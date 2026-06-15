@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import { Map } from '@maplibre/maplibre-react-native';
 
 export default function Map(){

@@ -1,19 +1,29 @@
-import { React } from 'react';
-import { Text } from 'react-native';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { cssInterop } from 'nativewind';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 import Tabs from './src/components/Tabs.js';
 
-// Map className to tabBarStyle
-cssInterop(Tabs, {
-  className: {
-    target: 'screenOptions.tabBarStyle',
-  },
-});
+SplashScreen.preventAutoHideAsync();
 
 export default function App(){
-    return(
+    const [loaded, error] = useFonts({
+      'Konkhmer-Regular': require('./assets/fonts/KonkhmerSleokchher-Regular.ttf'),
+      'Lexend-Bold': require('./assets/fonts/Lexend-VariableFont_wght.ttf'),
+    });
+
+    useEffect(() => {
+      if (loaded || error) {
+        SplashScreen.hideAsync();
+      }
+    }, [loaded, error]);
+
+    if (!loaded && !error) {
+      return null;
+    }
+
+    return (
         <NavigationContainer>
             <Tabs />
         </NavigationContainer>
