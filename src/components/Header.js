@@ -5,7 +5,7 @@ import Logo from '../../assets/system-icons/Logo.svg';
 import Map from '../../assets/header-icons/Map.svg';
 import Notification from '../../assets/header-icons/Notification.svg'
 
-export default function Header(){
+export default function Header({ name }){
     return(
         <View className="mt-16 justify-between flex-row px-7">
             {/* Logo with greeting text */}
@@ -16,7 +16,7 @@ export default function Header(){
                         Hello, 
                     </Text>
                     <Text className="text-[#FFC710] font-heading text-4xl tracking-[-2px]">
-                        Frenemy
+                        {name}
                     </Text>
                 </View>
             </View>
