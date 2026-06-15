@@ -6,7 +6,15 @@ module.exports = {
     extend: {
       fontFamily: {
         heading: ['Konkhmer-Regular'],
-        body: ['Lexend-Bold']
+        'body-thin': ['Lexend-Thin'],
+        'body-extralight': ['Lexend-ExtraLight'],
+        'body-light': ['Lexend-Light'],
+        body: ['Lexend-Regular'],
+        'body-medium': ['Lexend-Medium'],
+        'body-semibold': ['Lexend-SemiBold'],
+        'body-bold': ['Lexend-Bold'],
+        'body-extrabold': ['Lexend-ExtraBold'],
+        'body-black': ['Lexend-Black'],
       }
     },
   },

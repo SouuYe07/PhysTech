@@ -13,7 +13,7 @@ export default function Header({ name }){
                 <Logo width={60} height={23}/>
                 <View className="flex-row">
                     <Text className="text-white font-heading text-4xl tracking-[-2px]">
-                        Hello, 
+                        Hello,
                     </Text>
                     <Text className="text-[#FFC710] font-heading text-4xl tracking-[-2px]">
                         {name}

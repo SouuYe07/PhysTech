@@ -19,11 +19,11 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return(
-        <Tab.Navigator screenOptions={({ route }) => ({ 
+        <Tab.Navigator screenOptions={({ route }) => ({
             headerShown: false,
             tabBarBackground: () => (
                 <LinearGradient
-                    style= {{
+                    style={{
                         overflow: 'hidden',
                         borderRadius: 25,
                         flex: 1
@@ -31,7 +31,6 @@ const Tabs = () => {
                     colors={['#101010', '#202020']}
                     start={{ x: 0, y: 1 }}
                     end={{ x: 1, y: 0 }}
-                    
                 />
             ),
             tabBarLabelStyle: {
@@ -51,11 +50,11 @@ const Tabs = () => {
                 paddingRight: 15
             },
             tabBarIcon: ({ color }) => {
-                const IconComponent = 
+                const IconComponent =
                     route.name === 'Home' ? HomeIcon :
                     route.name === 'Progress' ? ProgressIcon :
                     route.name === 'Community' ? CommunityIcon :
-                    route.name === 'Profile' ? ProfileIcon : 
+                    route.name === 'Profile' ? ProfileIcon :
                     null;
 
                 if (!IconComponent) return null;
@@ -66,8 +65,8 @@ const Tabs = () => {
 
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Progress" component={Progress} />
-            <Tab.Screen name="Session" component={SessionSetup} 
-                options = {{
+            <Tab.Screen name="Session" component={SessionSetup}
+                options={{
                     tabBarButton: (props) => {
                         const currentRoute = useNavigationState(state => state.routes[state.index].name);
                         const active = currentRoute === 'Session';
@@ -94,7 +93,7 @@ const Tabs = () => {
                                     boxShadow: glow,
                                 }}>
                                     <SessionIcon width={28} height={28}></SessionIcon>
-                                </View>     
+                                </View>
                                 <Text style={{color, fontSize: 10, fontFamily: 'Lexend-Bold'}}>
                                     Session
                                 </Text>
