@@ -77,13 +77,13 @@ const Tabs = () => {
                             <TouchableOpacity
                                 {...props}
                                 style={{
-                                    top: -40,
+                                    top: -35,
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }}
                             >
                                 <View style={{
-                                    width: 55,
+                                    width: 58,
                                     height: 50,
                                     backgroundColor: '#FFC710',
                                     elevation: 8,
@@ -92,7 +92,7 @@ const Tabs = () => {
                                     borderRadius: 40,
                                     boxShadow: glow,
                                 }}>
-                                    <SessionIcon width={28} height={28}></SessionIcon>
+                                    <SessionIcon width={35} height={35}></SessionIcon>
                                 </View>
                                 <Text style={{color, fontSize: 10, fontFamily: 'Lexend-Bold'}}>
                                     Session

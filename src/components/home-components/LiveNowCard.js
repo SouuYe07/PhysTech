@@ -6,14 +6,14 @@ export default function LiveNowCard({ friends, area }) {
     return(
         <LinearGradient 
 			colors={["#0D0D0D", "#262626"]}
-			start={{ x: 0.3, y: 0 }} // Diagonal start point
+			start={{ x: 0.3, y: 0 }}
 			end={{ x: 0.7, y: 1 }}
 			style= {{ borderRadius: 20 }}
 			className="flex-row w-[345px] h-[140px] mt-7 item-center"
 		>
 			
             {/* Text */}
-            <View className="h-full justify-center gap-y-1 px-6">
+            <View className="h-full justify-center gap-y-1 px-6 w-[240px]">
                 <Text className="text-[#AFAFAF] font-body-semibold tracking-[-1px] text-[22px] mt-[-4px]">
                     Live Now
                 </Text>
