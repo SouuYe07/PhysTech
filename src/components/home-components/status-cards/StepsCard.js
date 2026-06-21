@@ -11,7 +11,7 @@ export default function StepsCard({ steps }) {
                     numberOfLines={1}
                     adjustsFontSizeToFit
                 >
-                    {steps.toLocaleString()}
+                    {steps.toLocaleString()}    
                 </Text>
                 <Footprints size={16} color="#FFC107" />
             </View>
