@@ -10,7 +10,7 @@ export default function StatusComponent() {
         <View className="w-full px-8 mt-1 pb-24">
             <View className="w-full flex-row gap-3 h-[260px]">
                 {/* Left Side */}
-                <View className="w-[170px]">
+                <View className="w-[190px]">
                     <WeeklyCard percentage={54} />
                 </View>
 

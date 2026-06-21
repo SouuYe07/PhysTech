@@ -10,23 +10,23 @@ export default function WeeklyCard({ percentage }){
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style= {{ borderRadius: 20 }}
-            className="w-[200px] h-[260px] items-center justify-center"
+            className="w-full h-full items-center justify-center pt-2"
         >
             <PieChart
                 data={[
                     { value: percentage, color: '#FFFFFF' },
                     { value: 100 - percentage, color: '#3A3A3C' },
                 ]}
-                radius={70}
+                radius={65}
                 innerRadius={0}
                 donut={false}
                 startAngle={-90}
             />
 
-            <Text className="text-white text-[32px] font-body-bold tracking-[-1px] mt-4">
+            <Text className="text-[#FFC107] text-[26px] font-body-bold tracking-[-1px] mt-2">
                 {percentage}%
             </Text>
-            <Text className="text-[#AFAFAF] text-[13px] font-body text-center px-4 mt-1">
+            <Text className="text-white text-[10px] font-body text-center px-4">
                 Of your weekly goal done
             </Text>
 

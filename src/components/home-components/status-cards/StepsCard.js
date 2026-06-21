@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Footprints } from 'lucide-react-native';
 
 export default function StepsCard({ steps }) {
     return (
@@ -13,9 +13,9 @@ export default function StepsCard({ steps }) {
                 >
                     {steps.toLocaleString()}
                 </Text>
-                <Feather name="map-pin" size={16} color="#FFC107" />
+                <Footprints size={16} color="#FFC107" />
             </View>
-            <Text className="text-[#AFAFAF] text-[12px] font-body mt-1">
+            <Text className="text-white text-[12px] font-body-semibold mt-1">
                 the past week
             </Text>
         </View>
