@@ -9,15 +9,15 @@ export default function LiveNowCard({ friends, area }) {
 			start={{ x: 0.3, y: 0 }}
 			end={{ x: 0.7, y: 1 }}
 			style= {{ borderRadius: 20 }}
-			className="flex-row w-[355px] h-[133px] mt-3"
+			className="flex-row w-[92%] h-[140px] mt-3"
 		>
 			
             {/* Text */}
-            <View className="h-full justify-center gap-y-1 px-6 w-[240px]">
-                <Text className="text-[#AFAFAF] font-body-semibold tracking-[-1px] text-[22px] mt-[-4px]">
+            <View className="h-full justify-center gap-y-1 px-6 flex-1">
+                <Text className="text-[#AFAFAF] font-body-semibold tracking-[-1px] text-[20px] mt-[-4px]">
                     Live Now
                 </Text>
-				<Text className="text-white text-[22px] font-body-bold leading-[24px] tracking-[-1px]">
+				<Text className="text-white text-[26px] font-body-bold leading-[36px] tracking-[-1px]" numberOfLines={2}>
                     {friends} Friends 
 					{"\n"}
                     {area} in your area
@@ -25,7 +25,7 @@ export default function LiveNowCard({ friends, area }) {
             </View>
 
             {/* See All Button */}
-			<View className="pl-5">
+			<View className="pl-2 pr-4">
 				<Pressable 
 					style={{
 						shadowColor: "#000",

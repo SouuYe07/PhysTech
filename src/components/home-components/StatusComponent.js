@@ -10,12 +10,12 @@ export default function StatusComponent() {
         <View className="w-full px-8 mt-1 pb-24">
             <View className="w-full flex-row gap-3">
                 {/* Left Side */}
-                <View className="h-[270px] w-[200px]">
+                <View className="h-[270px] flex-[1.4]">
                     <WeeklyCard percentage={54} />
                 </View>
 
                 {/* Right Side */}
-                <View className="gap-3 w-[143px]">
+                <View className="gap-3 flex-1">
                     <View className="h-[166px]">
                         <FriendsCard friends={53} peopleYouMayKnow={10} />
                     </View>
