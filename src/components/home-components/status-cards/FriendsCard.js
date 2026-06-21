@@ -1,17 +1,22 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
-export default function WeeklyCard({ percentage }){
-    return(
-        <LinearGradient
-            colors={["#050505", "#333333"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style= {{ borderRadius: 20 }}
-            className="w-[200px] h-[260px]"
-        >
-            
-        </LinearGradient>
+export default function FriendsCard({ friends, peopleYouMayKnow }) {
+    return (
+        <View className="flex-1 bg-[#1c1c1e] rounded-3xl justify-center px-4 py-3">
+            <Text className="text-[#FFC107] text-[22px] font-body-bold tracking-[-1px]">
+                {friends}
+            </Text>
+            <Text className="text-[#AFAFAF] text-[12px] font-body mb-2" numberOfLines={1}>
+                Friends
+            </Text>
+
+            <Text className="text-[#FFC107] text-[22px] font-body-bold tracking-[-1px]">
+                {peopleYouMayKnow}
+            </Text>
+            <Text className="text-[#AFAFAF] text-[12px] font-body">
+                People you {"\n"}may know
+            </Text>
+        </View>
     );
 }

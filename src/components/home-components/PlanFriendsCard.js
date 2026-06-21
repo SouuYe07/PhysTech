@@ -6,10 +6,10 @@ export default function PlanFriendsCard({ activity, name, date, time }){
     return(
         <LinearGradient 
             colors={["#F0F0F0", "#8E8E93", "#434343"]} 
-            start={{ x: 0, y: 0 }}                   
-            end={{ x: 1, y: 1 }}                      
-            locations={[0.4, 0.8, 1.0]}                  
-            style={{ borderRadius: 20 }}
+            start={{ x: 0.1, y: 0 }}                   
+            end={{ x: 0.9, y: 1.1 }}                      
+            locations={[0.3, 0.75, 1.0]}                  
+            style={{ borderRadius: 24 }}
             className="flex-row w-[345px] h-[140px] mt-3 px-6"
         >
             {/* Text Details */}

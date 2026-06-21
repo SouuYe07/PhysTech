@@ -26,7 +26,16 @@ export default function LiveNowCard({ friends, area }) {
 
             {/* See All Button */}
 			<View className="pl-5">
-				<Pressable className="w-[70px] h-[30px] mt-8 bg-[#212121] rounded-[8px] border-2 border-[#6D6D6D]">
+				<Pressable 
+					style={{
+						shadowColor: "#000",
+						shadowOffset: { width: 0, y: 3 },
+						shadowOpacity: 0.4,
+						shadowRadius: 4,
+						elevation: 5,
+					}}
+					className="w-[70px] h-[30px] mt-8 bg-[#212121] rounded-[8px] border-2 border-[#6D6D6D]"
+					>
 					<Text className="text-white font-body text-center leading-[25px]">
 						See All
 					</Text>
