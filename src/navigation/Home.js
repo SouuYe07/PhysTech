@@ -17,12 +17,13 @@ export default function Home() {
                     <PlanFriendsCard activity="Running" name="Oble" date="July 1" time="4:00 PM"/>
                 </View>
 
-                <Text className="text-white text-4xl font-heading pl-8 mt-5 mb-1 tracking-[-1px]"> 
+                <Text className="text-white text-[28px] font-heading pl-8 mt-3 mb-1 tracking-[-1px]"> 
                     Status 
                 </Text>
-                
-                <StatusComponent />
+                <View className="items-center w-full">
+                    <StatusComponent />
                 </View>
+            </View>
         </View>
     );
 }

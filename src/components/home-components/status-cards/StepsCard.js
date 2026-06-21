@@ -7,7 +7,7 @@ export default function StepsCard({ steps }) {
         <View className="flex-1 bg-[#1c1c1e] rounded-3xl justify-center px-4 py-3">
             <View className="flex-row items-center justify-between">
                 <Text 
-                    className="text-[#FFC107] text-[26px] font-body-bold tracking-[-1px]"
+                    className="text-[#FFC107] text-[32px] font-body-bold tracking-[-1px]"
                     numberOfLines={1}
                     adjustsFontSizeToFit
                 >

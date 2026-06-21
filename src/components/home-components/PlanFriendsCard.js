@@ -10,7 +10,7 @@ export default function PlanFriendsCard({ activity, name, date, time }){
             end={{ x: 0.9, y: 1.1 }}                      
             locations={[0.3, 0.75, 1.0]}                  
             style={{ borderRadius: 24 }}
-            className="flex-row w-[345px] h-[140px] mt-3 px-6"
+            className="flex-row w-[355px] h-[133px] mt-3 px-6"
         >
             {/* Text Details */}
             <View className="h-full justify-center flex-1 pr-2">

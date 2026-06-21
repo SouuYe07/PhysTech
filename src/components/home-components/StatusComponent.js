@@ -8,16 +8,20 @@ import StepsCard from './status-cards/StepsCard';
 export default function StatusComponent() {
     return (
         <View className="w-full px-8 mt-1 pb-24">
-            <View className="w-full flex-row gap-3 h-[260px]">
+            <View className="w-full flex-row gap-3">
                 {/* Left Side */}
-                <View className="w-[190px]">
+                <View className="h-[270px] w-[200px]">
                     <WeeklyCard percentage={54} />
                 </View>
 
                 {/* Right Side */}
-                <View className="flex-1 flex-col gap-3">
-                    <FriendsCard friends={53} peopleYouMayKnow={10} />
-                    <StepsCard steps={14211} />
+                <View className="gap-3 w-[143px]">
+                    <View className="h-[166px]">
+                        <FriendsCard friends={53} peopleYouMayKnow={10} />
+                    </View>
+                    <View className="h-[96px]">
+                        <StepsCard steps={14211} />
+                    </View>
                 </View>
             </View>
         </View>

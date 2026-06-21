@@ -9,7 +9,7 @@ export default function LiveNowCard({ friends, area }) {
 			start={{ x: 0.3, y: 0 }}
 			end={{ x: 0.7, y: 1 }}
 			style= {{ borderRadius: 20 }}
-			className="flex-row w-[345px] h-[140px] mt-3"
+			className="flex-row w-[355px] h-[133px] mt-3"
 		>
 			
             {/* Text */}

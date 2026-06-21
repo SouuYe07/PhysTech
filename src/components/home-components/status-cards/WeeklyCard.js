@@ -17,16 +17,16 @@ export default function WeeklyCard({ percentage }){
                     { value: percentage, color: '#FFFFFF' },
                     { value: 100 - percentage, color: '#3A3A3C' },
                 ]}
-                radius={65}
+                radius={60}
                 innerRadius={0}
                 donut={false}
                 startAngle={-90}
             />
 
-            <Text className="text-[#FFC107] text-[26px] font-body-bold tracking-[-1px] mt-2">
+            <Text className="text-[#FFC107] text-[32px] font-body-bold tracking-[-1px] mt-2">
                 {percentage}%
             </Text>
-            <Text className="text-white text-[10px] font-body text-center px-4">
+            <Text className="text-white text-[12px] font-body-semibold text-center px-4">
                 Of your weekly goal done
             </Text>
 
