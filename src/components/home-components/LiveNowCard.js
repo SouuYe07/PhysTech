@@ -9,7 +9,7 @@ export default function LiveNowCard({ friends, area }) {
 			start={{ x: 0.3, y: 0 }}
 			end={{ x: 0.7, y: 1 }}
 			style= {{ borderRadius: 20 }}
-			className="flex-row w-[345px] h-[140px] mt-7 item-center"
+			className="flex-row w-[345px] h-[140px] mt-3"
 		>
 			
             {/* Text */}
@@ -17,7 +17,7 @@ export default function LiveNowCard({ friends, area }) {
                 <Text className="text-[#AFAFAF] font-body-semibold tracking-[-1px] text-[22px] mt-[-4px]">
                     Live Now
                 </Text>
-				<Text className="text-white text-[26px] font-body-bold leading-[24px] tracking-[-1px]">
+				<Text className="text-white text-[22px] font-body-bold leading-[24px] tracking-[-1px]">
                     {friends} Friends 
 					{"\n"}
                     {area} in your area

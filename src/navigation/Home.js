@@ -10,11 +10,11 @@ export default function Home() {
     return (
         <View className="bg-black flex-1">
             <Header name="Frenemy"/>
-            <View className="items-center w-full">
+            <View className="items-center w-full mt-4">
                 <LiveNowCard friends="3" area="39"/>
                 <PlanFriendsCard activity="Running" name="Oble" date="July 1" time="4:00 PM"/>
             </View>
-            <Text className="text-white text-4xl font-heading pl-7 mt-5 tracking-[-1px]"> Status </Text>
+            <Text className="text-white text-4xl font-heading pl-7 mt-3 tracking-[-1px]"> Status </Text>
             <StatusComponent />
         </View>
     );
