@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import Dropdown from './Dropdown.js';
 import SessionType from './SessionType.js';
@@ -14,6 +14,11 @@ export default function SessionSetup() {
         { type: 'Cycling', logo: Cycling }
     ];
 
+    // ── State lives HERE in the parent, one per child ──
+    const [activity, setActivity] = useState(ActivityChoices[0]);  // for Dropdown
+    const [sessionType, setSessionType] = useState("Solo");        // for SessionType
+    const [visibilityType, setVisibilityType] = useState("Private");
+
     return (
         <View className="w-[360px] h-[555px] bg-black rounded-3xl items-center">
             <View className="h-1 w-20 bg-[#303030] mt-2 shadow-sm shadow-gray-600 rounded-md"/>
@@ -25,11 +30,21 @@ export default function SessionSetup() {
                 </Text>
 
                 <View className="mt-5 gap-y-4">
-                    <Dropdown options={ActivityChoices} />
-                    <SessionType />
-                </View>
+                    {/* Dropdown: give it the value + a way to change it */}
+                    <Dropdown
+                        options={ActivityChoices}
+                        selected={activity}
+                        onSelect={setActivity}
+                    />
 
-                
+                    {/* SessionType: same pattern — value down, setter down */}
+                    <SessionType
+                        selected={sessionType}
+                        onSelect={setSessionType}
+                    />
+
+                    
+                </View>
             </View>
         </View>
     );

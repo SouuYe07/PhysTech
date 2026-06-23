@@ -4,9 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import Chevron from '../../../assets/session-icons/chevron-down.svg';
 
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, selected, onSelect }) => {
+    // isOpen stays local — the parent doesn't care whether the menu is showing
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(options && options.length > 0 ? options[0] : null);
+
+    // The chosen value now comes from the parent via props
+    const selectedItem = selected;
 
     return (
         <View>
@@ -58,7 +61,7 @@ const Dropdown = ({ options }) => {
                                 key={index}
                                 className="flex-row items-center p-3 rounded-md active:bg-[#222]"
                                 onPress={() => {
-                                    setSelectedItem(item);
+                                    onSelect(item);   // tell the parent what was picked
                                     setIsOpen(false);
                                 }}
                             >

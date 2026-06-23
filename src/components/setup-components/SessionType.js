@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import Solo from '../../../assets/session-icons/Solo.svg';
 import Group from '../../../assets/session-icons/Group.svg';
 
-export default function SessionType(){    
-    const [selectedType, setSelectedType] = useState("Solo");
-
-    const handleSelect = (type) => {
-        setSelectedType(type)
-    }
+export default function SessionType({ selected, onSelect }){
+    // The chosen type now lives in the parent and arrives via props
+    const selectedType = selected;
 
     return(
         <View>
@@ -18,7 +15,7 @@ export default function SessionType(){
                 Session Type
             </Text>
             <View className="w-full h-16 bg-[#303030] rounded-lg flex-row justify-center gap-x-[6px]">
-                <TouchableOpacity className="w-[48%] items-center justify-center flex-row" onPress={() => setSelectedType("Solo")}>
+                <TouchableOpacity className="w-[48%] items-center justify-center flex-row" onPress={() => onSelect("Solo")}>
                     <LinearGradient
                         style={{
                             borderRadius: 5,
@@ -44,7 +41,7 @@ export default function SessionType(){
                     </LinearGradient>
                 </TouchableOpacity>
                 <View className="h-full w-[1px] bg-black"/>
-                <TouchableOpacity className="w-[48%] items-center justify-center flex-row" onPress={() => setSelectedType("Group")}>
+                <TouchableOpacity className="w-[48%] items-center justify-center flex-row" onPress={() => onSelect("Group")}>
                     <LinearGradient
                         style={{
                             borderRadius: 5,
