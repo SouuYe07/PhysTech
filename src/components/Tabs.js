@@ -5,7 +5,7 @@ import { useNavigationState } from '@react-navigation/native'
 
 import Home from "../navigation/Home.js";
 import Progress from "../navigation/Progress.js";
-import SessionSetup from "../navigation/SessionSetup.js";
+import SessionMap from "../navigation/SessionMap.js";
 import Community from "../navigation/Community.js";
 import Profile from "../navigation/Profile.js";
 
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return(
-        <Tab.Navigator screenOptions={({ route }) => ({
+        <Tab.Navigator initialRouteName="Session" screenOptions={({ route }) => ({
             headerShown: false,
             tabBarBackground: () => (
                 <LinearGradient
@@ -65,7 +65,7 @@ const Tabs = () => {
 
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Progress" component={Progress} />
-            <Tab.Screen name="Session" component={SessionSetup}
+            <Tab.Screen name="Session" component={SessionMap}
                 options={{
                     tabBarButton: (props) => {
                         const currentRoute = useNavigationState(state => state.routes[state.index].name);

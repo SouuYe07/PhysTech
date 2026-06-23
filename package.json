@@ -22,8 +22,10 @@
     "install": "^0.13.0",
     "lucide-react-native": "^1.21.0",
     "nativewind": "^4.2.4",
-    "react": "^19.1.0",
+    "react": "19.1.4",
+    "react-dom": "19.1.4",
     "react-native": "^0.81.5",
+    "react-native-element-dropdown": "^2.12.4",
     "react-native-get-location": "^6.0.1",
     "react-native-gifted-charts": "^1.4.77",
     "react-native-reanimated": "~4.1.1",
@@ -39,5 +41,10 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "react-native-svg-transformer": "^1.5.3",
     "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "js-yaml": "^4.1.2",
+    "postcss": "^8.5.10",
+    "uuid": "^11.1.1"
   }
 }
