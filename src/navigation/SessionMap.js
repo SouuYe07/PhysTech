@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Map, Camera } from '@maplibre/maplibre-react-native';
 
-import SessionSetup from "../components/SessionSetup.js"
+import SessionSetup from "../components/setup-components/SessionSetup.js"
 
 export default function SessionMap(){
     return(

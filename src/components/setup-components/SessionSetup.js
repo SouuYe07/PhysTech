@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Dropdown from './Dropdown.js'
 
-import Logo from '../../assets/system-icons/Logo.svg';
-import Cycling from '../../assets/etc-icons/Cycling.svg';
-import Running from '../../assets/etc-icons/Running.svg';
+import Dropdown from './Dropdown.js';
+import SessionType from './SessionType.js';
+
+import Logo from '../../../assets/system-icons/Logo.svg';
+import Cycling from '../../../assets/session-icons/Cycling.svg';
+import Running from '../../../assets/session-icons/Running.svg';
 
 export default function SessionSetup() {
     const ActivityChoices = [
@@ -22,11 +24,12 @@ export default function SessionSetup() {
                     Setup Session
                 </Text>
 
-                <View className="mt-5">
-                    <Dropdown options={ActivityChoices}>
-
-                    </Dropdown>
+                <View className="mt-5 gap-y-4">
+                    <Dropdown options={ActivityChoices} />
+                    <SessionType />
                 </View>
+
+                
             </View>
         </View>
     );
