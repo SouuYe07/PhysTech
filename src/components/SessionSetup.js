@@ -1,9 +1,17 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import Dropdown from './Dropdown.js'
 
 import Logo from '../../assets/system-icons/Logo.svg';
+import Cycling from '../../assets/etc-icons/Cycling.svg';
+import Running from '../../assets/etc-icons/Running.svg';
 
 export default function SessionSetup() {
+    const ActivityChoices = [
+        { type: 'Running', logo: Running },
+        { type: 'Cycling', logo: Cycling }
+    ];
+
     return (
         <View className="w-[360px] h-[555px] bg-black rounded-3xl items-center">
             <View className="h-1 w-20 bg-[#303030] mt-2 shadow-sm shadow-gray-600 rounded-md"/>
@@ -13,6 +21,12 @@ export default function SessionSetup() {
                 <Text className="text-white font-heading text-5xl tracking-[-2px]">
                     Setup Session
                 </Text>
+
+                <View className="mt-5">
+                    <Dropdown options={ActivityChoices}>
+
+                    </Dropdown>
+                </View>
             </View>
         </View>
     );
