@@ -33,7 +33,7 @@ export default function SessionType({ selected, onSelect }){
                         end={{ x: 0.55, y: 1 }}
                     >
                         <View className="h-10 w-10 bg-[#303030] justify-center items-center rounded-lg ml-3 flex-row">
-                            <Solo color={selectedType == "Group" ? "#FFC710" : "#808080"}/>
+                            <Solo color={selectedType == "Solo" ? "#FFC710" : "#808080"}/>
                         </View>
                         <Text className={`font-heading text-xl ml-2 ${selectedType === "Solo" ? "text-[#FFC710]" : "text-[#808080]"}`}>
                             Solo
@@ -61,7 +61,7 @@ export default function SessionType({ selected, onSelect }){
                         <View className="h-10 w-10 bg-[#303030] justify-center items-center rounded-lg ml-3 flex-row">
                             <Group color={selectedType == "Group" ? "#FFC710" : "#808080"}/>
                         </View>
-                        <Text className={`font-heading text-xl ml-2 ${selectedType === "Solo" ? "text-[#FFC710]" : "text-[#808080]"}`}>
+                        <Text className={`font-heading text-xl ml-2 ${selectedType === "Group" ? "text-[#FFC710]" : "text-[#808080]"}`}>
                             Group
                         </Text>
                     </LinearGradient>
