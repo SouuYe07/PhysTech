@@ -20,6 +20,10 @@ export default function SessionSetup() {
     const [sessionType, setSessionType] = useState("Solo");        // for SessionType
     const [isPublic, setPublic] = useState(true);
 
+    const startRun = () => {
+        console.log(`${activity.type} ${sessionType} ${isPublic}`)
+    }
+
     return (
         <View className="w-[360px] h-[555px] bg-black rounded-3xl items-center">
             <View className="h-1 w-20 bg-[#303030] mt-2 shadow-sm shadow-gray-600 rounded-md"/>
@@ -48,6 +52,14 @@ export default function SessionSetup() {
                         selected={isPublic}
                         onSelect={setPublic}
                     />
+
+                    <View className="w-full items-center mt-6">
+                        <TouchableOpacity className="w-[180px] h-[40px] bg-[#FFC710] rounded-3xl items-center justify-center" onPress={startRun}>
+                            <Text className="font-heading">
+                                Start Session
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
