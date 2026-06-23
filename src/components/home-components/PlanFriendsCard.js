@@ -14,14 +14,13 @@ export default function PlanFriendsCard({ activity, name, date, time }){
         >
             {/* Text Details */}
             <View className="h-full justify-center flex-1 pr-2">
-                <Text className="text-zinc-700 font-body-bold tracking-[-0.5px] text-[21px] mt-[-4px] mb-2">
+                <Text className="text-zinc-700 font-body-bold tracking-[-1px] text-[20px] mt-[4px]">
                     Upcoming Plans
                 </Text>
-                <Text className="text-zinc-900 mt-[-5px] text-[23px] font-body-bold tracking-[-1px] leading-7">
+                <Text className="text-black mt-[-5px] text-[23px] font-body-bold tracking-[-1px] leading-7 pb-[4px]">
                     {activity} with {name}
                 </Text>
-                {/* Changed mt-1 to mt-0 or mt-[-2px] */}
-                <Text className="text-black text-[18px] font-body-bold tracking-[-0.5px] leading-6 mt-0">
+                <Text className="text-black text-[18px] font-body-bold tracking-[-0.5px] leading-6 mt-[-4px]">
                     {date}  {time}
                 </Text>
             </View>
