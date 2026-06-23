@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import Dropdown from './Dropdown.js';
 import SessionType from './SessionType.js';
+import Visibility from './Visibility.js';
 
 import Logo from '../../../assets/system-icons/Logo.svg';
 import Cycling from '../../../assets/session-icons/Cycling.svg';
@@ -17,7 +18,7 @@ export default function SessionSetup() {
     // ── State lives HERE in the parent, one per child ──
     const [activity, setActivity] = useState(ActivityChoices[0]);  // for Dropdown
     const [sessionType, setSessionType] = useState("Solo");        // for SessionType
-    const [visibilityType, setVisibilityType] = useState("Private");
+    const [isPublic, setPublic] = useState(true);
 
     return (
         <View className="w-[360px] h-[555px] bg-black rounded-3xl items-center">
@@ -43,7 +44,10 @@ export default function SessionSetup() {
                         onSelect={setSessionType}
                     />
 
-                    
+                    <Visibility
+                        selected={isPublic}
+                        onSelect={setPublic}
+                    />
                 </View>
             </View>
         </View>
