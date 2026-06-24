@@ -17,13 +17,13 @@ export default function WeeklyCard({ percentage }){
                     { value: percentage, color: '#FFFFFF' },
                     { value: 100 - percentage, color: '#3A3A3C' },
                 ]}
-                radius={60}
+                radius={65}
                 innerRadius={0}
                 donut={false}
                 startAngle={-90}
             />
 
-            <Text className="text-[#FFC107] text-[32px] font-body-bold tracking-[-1px] mt-2">
+            <Text className="text-[#FFC107] text-[32px] font-body-bold tracking-[-1px] mt-4 leading-7">
                 {percentage}%
             </Text>
             <Text className="text-white text-[11px] font-body-semibold text-center px-4">
