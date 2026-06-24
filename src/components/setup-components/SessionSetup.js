@@ -9,7 +9,7 @@ import Logo from '../../../assets/system-icons/Logo.svg';
 import Cycling from '../../../assets/session-icons/Cycling.svg';
 import Running from '../../../assets/session-icons/Running.svg';
 
-export default function SessionSetup() {
+export default function SessionSetup({ onStart }) {
     const ActivityChoices = [
         { type: 'Running', logo: Running },
         { type: 'Cycling', logo: Cycling }
@@ -21,7 +21,7 @@ export default function SessionSetup() {
     const [isPublic, setPublic] = useState(true);
 
     const startRun = () => {
-        console.log(`${activity.type} ${sessionType} ${isPublic}`)
+        onStart({ activity, sessionType, isPublic });
     }
 
     return (

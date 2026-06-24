@@ -3,6 +3,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigationState } from '@react-navigation/native'
 
+import { tabBarStyle } from './TabBarStyle.js';
+
 import Home from "../navigation/Home.js";
 import Progress from "../navigation/Progress.js";
 import SessionMap from "../navigation/SessionMap.js";
@@ -39,16 +41,7 @@ const Tabs = () => {
             },
             tabBarActiveTintColor: '#FFC710',
             tabBarInactiveTintColor: '#FFFFFF',
-            tabBarStyle: {
-                backgroundColor: 'transparent',
-                borderTopWidth: 0,
-                position: 'absolute',
-                height: 90,
-                paddingBottom: 0,
-                paddingTop: 10,
-                paddingLeft: 15,
-                paddingRight: 15
-            },
+            tabBarStyle: tabBarStyle,
             tabBarIcon: ({ color }) => {
                 const IconComponent =
                     route.name === 'Home' ? HomeIcon :
