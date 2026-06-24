@@ -3,11 +3,20 @@ import { View } from 'react-native';
 import { Map, Camera } from '@maplibre/maplibre-react-native';
 
 import { tabBarStyle } from '../components/TabBarStyle.js';
-import SessionSetup from "../components/setup-components/SessionSetup.js"
+import SessionSetup from "../components/setup-components/SessionSetup.js";
+import SessionControls from '../components/SessionControls.js';
 
 export default function SessionMap({ navigation }){
-    const [sessionStarted, setSessionStarted] = useState(true);
+    const [sessionStarted, setSessionStarted] = useState(false);
     const [config, setConfig] = useState(null);
+    const [isPaused, setIsPaused] = useState(false);
+    
+    const onPause = () => setIsPaused(true);
+    const onResume = () => setIsPaused(false);
+    const onStop = () => {
+        setSessionStarted(true);
+        setIsPaused(false);
+    }
     
     useEffect(() => {
         navigation.setOptions({
@@ -41,6 +50,15 @@ export default function SessionMap({ navigation }){
                         }}
                     />
                 </View>
+            )}
+
+            {!sessionStarted &&(
+                <SessionControls
+                    isPaused={isPaused}
+                    onPause={onPause}
+                    onResume={onResume}
+                    onStop={onStop}
+                />
             )}
         </View>
     );
