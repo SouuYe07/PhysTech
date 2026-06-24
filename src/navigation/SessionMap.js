@@ -33,22 +33,21 @@ export default function SessionMap({ navigation }){
                 />
             </Map>
             {sessionStarted && (
-                <KeyboardAvoidingView 
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    className="absolute inset-0 flex items-center justify-center bg-black/40" // added bg-black/40 for a nice backdrop dim
+                <View
+                    className="absolute inset-0 items-center justify-center bg-black/40"
                     pointerEvents="box-none"
                 >
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View className="absolute inset-0" />
                     </TouchableWithoutFeedback>
 
-                    <SessionSetup 
+                    <SessionSetup
                         onStart={(cfg) => {
                             setConfig(cfg);
                             setSessionStarted(false);
                         }}
                     />
-                </KeyboardAvoidingView>
+                </View>
             )}
         </View>
     );
