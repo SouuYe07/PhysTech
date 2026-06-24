@@ -11,8 +11,7 @@ export default function SessionMap({ navigation }){
     const [config, setConfig] = useState(null);
     const [isPaused, setIsPaused] = useState(false);
     
-    const onPause = () => setIsPaused(true);
-    const onResume = () => setIsPaused(false);
+    const onPaused = () => setIsPaused(current => !current);
     const onStop = () => {
         setSessionStarted(true);
         setIsPaused(false);
@@ -62,8 +61,7 @@ export default function SessionMap({ navigation }){
             {!sessionStarted &&(
                 <SessionControls
                     isPaused={isPaused}
-                    onPause={onPause}
-                    onResume={onResume}
+                    onPaused={onPaused}
                     onStop={onStop}
                 />
             )}
