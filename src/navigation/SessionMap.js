@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Map, Camera } from '@maplibre/maplibre-react-native';
 
 import { tabBarStyle } from '../components/TabBarStyle.js';
@@ -33,14 +33,22 @@ export default function SessionMap({ navigation }){
                 />
             </Map>
             {sessionStarted && (
-                <View className="absolute inset-0 flex items-center justify-center" pointerEvents="box-none">
+                <KeyboardAvoidingView 
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    className="absolute inset-0 flex items-center justify-center bg-black/40" // added bg-black/40 for a nice backdrop dim
+                    pointerEvents="box-none"
+                >
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View className="absolute inset-0" />
+                    </TouchableWithoutFeedback>
+
                     <SessionSetup 
                         onStart={(cfg) => {
                             setConfig(cfg);
                             setSessionStarted(false);
                         }}
                     />
-                </View>
+                </KeyboardAvoidingView>
             )}
         </View>
     );
