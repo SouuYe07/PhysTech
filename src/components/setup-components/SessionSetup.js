@@ -5,6 +5,7 @@ import Dropdown from './Dropdown.js';
 import SessionType from './SessionType.js';
 import Visibility from './Visibility.js';
 import SessionName from './SessionName.js';
+import Goal from './Goal.js';
 
 import Logo from '../../../assets/system-icons/Logo.svg';
 import Cycling from '../../../assets/session-icons/Cycling.svg';
@@ -21,9 +22,11 @@ export default function SessionSetup({ onStart }) {
     const [sessionType, setSessionType] = useState("Solo");        // for SessionType
     const [isPublic, setPublic] = useState(true);
     const [sessionName, setSessionName] = useState('');
+    const [distance, setDistance] = useState('');
+    const [time, setTime] = useState('');
 
     const startRun = () => {
-        onStart({ activity, sessionType, isPublic, sessionName });
+        onStart({ activity, sessionType, isPublic, sessionName, distance, time });
     }
 
     return (
@@ -37,11 +40,11 @@ export default function SessionSetup({ onStart }) {
 
                 <View className="h-full w-10/12 mt-10">
                     <Logo width={75} height={23}/>
-                    <Text className="text-white font-heading text-5xl tracking-[-2px]">
+                    <Text className="text-white font-heading text-[39px] tracking-[-2px] leading-[40px] mt-1">
                         Setup Session
                     </Text>
 
-                    <View className="mt-5 gap-y-4">
+                    <View className="mt-2 gap-y-2">
                         {/* Dropdown: give it the value + a way to change it */}
                         <Dropdown
                             options={ActivityChoices}
@@ -63,6 +66,13 @@ export default function SessionSetup({ onStart }) {
                         <SessionName
                             selected={sessionName}
                             onSelect={setSessionName}
+                        />
+
+                        <Goal
+                            distance={distance}
+                            onDistanceChange={setDistance}
+                            time={time}
+                            onTimeChange={setTime}
                         />
 
                         <View className="w-full items-center mt-6">

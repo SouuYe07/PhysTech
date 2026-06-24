@@ -11,7 +11,7 @@ export default function SessionType({ selected, onSelect }){
 
     return(
         <View>
-            <Text className="font-heading text-[#A6A3A3] tracking-[0px]">
+            <Text className="font-heading text-[#A6A3A3] tracking-[0px] leading-[20px]">
                 Session Type
             </Text>
             <View className="w-full h-16 bg-[#303030] rounded-lg flex-row justify-center gap-x-[6px]">

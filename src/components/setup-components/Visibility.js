@@ -8,7 +8,7 @@ import Private from '../../../assets/session-icons/Private.svg';
 export default function Visibility({ selected, onSelect }){
     return(
         <View>
-            <Text className="font-heading text-[#A6A3A3] tracking-[0px]">
+            <Text className="font-heading text-[#A6A3A3] tracking-[0px] leading-[20px]">
                 Privacy
             </Text>
             <TouchableOpacity onPress={() => onSelect(!selected)}>
