@@ -17,11 +17,11 @@ export default function LiveNowCard({ friends, area }) {
                 <Text className="text-[#AFAFAF] font-body-semibold tracking-[-1px] text-[20px] mt-[-4px]">
                     Live Now
                 </Text>
-				<Text className="text-white text-[26px] font-body-bold leading-[36px] tracking-[-1px]" numberOfLines={2}>
-                    {friends} Friends 
+				<Text className="text-white text-[27px] font-body-bold leading-[28px] tracking-[-1px]" numberOfLines={2}>
+					{friends} Friends 
 					{"\n"}
-                    {area} in your area
-                </Text>
+					{area} in your area
+				</Text>
             </View>
 
             {/* See All Button */}

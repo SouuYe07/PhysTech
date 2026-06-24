@@ -7,7 +7,7 @@ import StepsCard from './status-cards/StepsCard';
 
 export default function StatusComponent() {
     return (
-        <View className="w-full px-8 mt-1 pb-24">
+        <View className="w-[92%] self-center mt-[-20px] pb-24">
             <View className="w-full flex-row gap-3">
                 {/* Left Side */}
                 <View className="h-[270px] flex-[1.4]">

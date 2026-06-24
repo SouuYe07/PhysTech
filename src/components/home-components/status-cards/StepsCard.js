@@ -15,7 +15,8 @@ export default function StepsCard({ steps }) {
                 </Text>
                 <Footprints size={16} color="#FFC107" />
             </View>
-            <Text className="text-white text-[12px] font-body-semibold mt-1">
+            
+            <Text className="text-white text-[12px] font-body-semibold mt-[-7px] text-center w-full">
                 the past week
             </Text>
         </View>

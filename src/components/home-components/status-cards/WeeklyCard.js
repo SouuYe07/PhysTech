@@ -26,7 +26,7 @@ export default function WeeklyCard({ percentage }){
             <Text className="text-[#FFC107] text-[32px] font-body-bold tracking-[-1px] mt-2">
                 {percentage}%
             </Text>
-            <Text className="text-white text-[12px] font-body-semibold text-center px-4">
+            <Text className="text-white text-[11px] font-body-semibold text-center px-4">
                 Of your weekly goal done
             </Text>
 
