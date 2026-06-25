@@ -23,9 +23,8 @@ export default function SessionSetup({ onStart }) {
     const [sessionName, setSessionName] = useState('');
     const [distance, setDistance] = useState('');
     const [time, setTime] = useState('');
-    const [keyboardOffset, setKeyboardOffset] = useState(0);  // 👈 add this
+    const [keyboardOffset, setKeyboardOffset] = useState(0);  
 
-    // 👇 add this
     useEffect(() => {
         const show = Keyboard.addListener('keyboardDidShow', (e) => {
             setKeyboardOffset(e.endCoordinates.height / 2);
