@@ -12,13 +12,26 @@ import SessionSetup from "../components/setup-components/SessionSetup.js";
 import SessionControls from '../components/SessionControls.js';
 import SessionProgress from '../components/SessionProgress';
 
+import { supabase } from '../lib/supabase';
+
 const toLineString = (coords) => ({
         type: 'Feature',
         geometry: {
             type: 'LineString',
             coordinates: coords.map(p => [p.longitude, p.latitude]),
         },
-    })
+    });
+
+const haversineKm = (a, b) => {
+    const R = 6371;
+    const dLat = (b.latitude - a.latitude) * Math.PI / 180;
+    const dLng = (b.longitude - a.longitude) * Math.PI / 180;
+    const x = Math.sin(dLat / 2) ** 2 +
+        Math.cos(a.latitude * Math.PI / 180) *
+        Math.cos(b.latitude * Math.PI / 180) *
+        Math.sin(dLng / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+};
 
 export default function SessionMap({ navigation }){
     const [sessionStarted, setSessionStarted] = useState(true);
@@ -27,21 +40,20 @@ export default function SessionMap({ navigation }){
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const [distanceKm, setDistanceKm] = useState(0);
     const [paceMinPerKm, setPaceMinPerKm] = useState(0);
-
-    const { saveSession } = useSessionTracking({
-        isActive: !sessionStarted,
-        isPaused,
-        isLeader: true,
-        onLocationUpdate: ({ distance_km, pace }) => {
-            setDistanceKm(distance_km);
-            setPaceMinPerKm(pace);
-        },
-    });
+    const [routeCoords, setRouteCoords] = useState([]);
+    const [currentLocation, setCurrentLocation] = useState(null);
 
     const onPaused = () => setIsPaused(current => !current);
 
-    const onStop = () => {
-        saveSession(elapsedSeconds);
+    const onStop = async () => {
+        const { error } = await supabase.from('sessions').insert({
+            distance_km: distanceKm,
+            pace_min_per_km: paceMinPerKm,
+            duration_seconds: elapsedSeconds,
+        });
+        if (error) console.log('Save error:', error);
+        else console.log('Session saved!');
+        
         setSessionStarted(true);
         setIsPaused(false);
         setElapsedSeconds(0);
@@ -49,12 +61,6 @@ export default function SessionMap({ navigation }){
         setPaceMinPerKm(0);
         setRouteCoords([]);
     }
-
-    const [elapsedSeconds, setElapsedSeconds] = useState(0);
-    const [distanceKm, setDistanceKm] = useState(0);
-    const [paceMinPerKm, setPaceMinPerKm] = useState(0);
-    const [routeCoords, setRouteCoords] = useState([]);
-    const [currentLocation, setCurrentLocation] = useState(null);
 
     // Intitializes the current location once SessionMap. js is opened
     const getCurrentLocation = async () => {
@@ -111,7 +117,24 @@ export default function SessionMap({ navigation }){
                     const point = { latitude, longitude };
 
                     setCurrentLocation(point);
-                    setRouteCoords(prev => [...prev, point]);
+                    setRouteCoords(prev => {
+                        const updated = [...prev, point];
+
+                        // Total distance
+                        let total = 0;
+                        for (let i = 1; i < updated.length; i++) {
+                            total += haversineKm(updated[i - 1], updated[i]);
+                        }
+                        setDistanceKm(total);
+
+                        // Pace (min/km)
+                        setElapsedSeconds(s => {
+                            if (total > 0) setPaceMinPerKm((s / 60) / total);
+                            return s;
+                        });
+
+                        return updated;
+                    });
                 }
             );
         })();
@@ -123,28 +146,6 @@ export default function SessionMap({ navigation }){
 
     return(
         <View className="relative w-full h-full">
-            
-             <View style={{ position: 'absolute', top: '50%', left: 0, right: 0, zIndex: 99, alignItems: 'center', gap: 10 }}>
-                <Button
-                    title="Test Insert"
-                    onPress={async () => {
-                        const { data, error } = await supabase
-                            .from('sessions')
-                            .insert({ distance_km: 5.5, pace_min_per_km: 4.2 });
-                        console.log('Insert result:', data, error);
-                    }}
-                />
-                <Button
-                    title="Test Update"
-                    onPress={async () => {
-                        const { data, error } = await supabase
-                            .from('sessions')
-                            .update({ distance_km: Math.random() * 10 })
-                            .eq('id', 1);
-                        console.log('Update result:', data, error);
-                    }}
-                />
-            </View>
             
             <Map 
                 mapStyle="https://tiles.openfreemap.org/styles/dark"
@@ -216,8 +217,6 @@ export default function SessionMap({ navigation }){
                     onStop={onStop}
                 />
             )}
-
-
         </View>
     );
 }
