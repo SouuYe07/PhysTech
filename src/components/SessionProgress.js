@@ -48,7 +48,7 @@ export default function SessionProgress({ duration = 0, distance = 0, pace = 0, 
         >
             <StatCard label="Duration" value={formatDuration(duration)} />
             <StatCard label="Distance" value={distance.toFixed(2)} unit="km" />
-            <StatCard label="Pace" value={formattedPace} unit="/km" />
+            <StatCard label="Pace" value={formattedPace} unit="/m" />
         </View>
     );
 }
