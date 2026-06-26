@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return(
-        <Tab.Navigator initialRouteName="Session" screenOptions={({ route }) => ({
+        <Tab.Navigator screenOptions={({ route }) => ({
             headerShown: false,
             tabBarBackground: () => (
                 <LinearGradient
