@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Map, Camera, Marker, GeoJSONSource, Layer } from '@maplibre/maplibre-react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ import SessionProgress from '../components/SessionProgress';
 
 import { supabase } from '../lib/supabase';
 
-const MY_USER_ID = 'unis';
+// One global room for the demo — everyone who starts a session joins this channel.
 const SESSION_ID = 'test-session-1';
 
 const toLineString = (coords) => ({
@@ -47,6 +47,10 @@ export default function SessionMap({ navigation }){
     const [currentLocation, setCurrentLocation] = useState(null);
     const [runningMates, setRunningMates] = useState({});
     const channelRef = useRef(null);
+    // Identity for this runner — no accounts, so the name they typed IS who they are.
+    // myId = name + random suffix (unique, dup-name-proof); myName = what others see.
+    const myIdRef = useRef(null);
+    const myNameRef = useRef(null);
 
     const onPaused = () => setIsPaused(current => !current);
 
@@ -120,12 +124,19 @@ export default function SessionMap({ navigation }){
 
         // Receive other users' locations
         channel.on('broadcast', { event: 'location' }, ({ payload }) => {
-            if (payload.userId === MY_USER_ID) return;
-            console.log('Received from:', payload.userId, payload.latitude, payload.longitude);
-            setRunningMates(prev => ({
-                ...prev,
-                [payload.userId]: { latitude: payload.latitude, longitude: payload.longitude }
-            }));
+            if (payload.userId === myIdRef.current) return;
+            console.log('Received from:', payload.name, payload.latitude, payload.longitude);
+            setRunningMates(prev => {
+                const existing = prev[payload.userId];
+                const prevCoords = existing ? existing.coords : [];
+                return {
+                    ...prev,
+                    [payload.userId]: {
+                        name: payload.name,
+                        coords: [...prevCoords, { latitude: payload.latitude, longitude: payload.longitude }],
+                    }
+                };
+            });
         }).subscribe((status) => {
             console.log('Broadcast status:', status);
         });
@@ -153,7 +164,7 @@ export default function SessionMap({ navigation }){
                         channelRef.current.send({
                             type: 'broadcast',
                             event: 'location',
-                            payload: { userId: MY_USER_ID, latitude, longitude }
+                            payload: { userId: myIdRef.current, name: myNameRef.current, latitude, longitude }
                         });
                         console.log('Broadcasted:', latitude, longitude);
                     }
@@ -204,17 +215,35 @@ export default function SessionMap({ navigation }){
                             <Location />
                         </Marker>
 
-                         {Object.entries(runningMates).map(([userId, loc]) => (
-                            <Marker
-                                key={userId}
-                                id={userId}
-                                lngLat={[loc.longitude, loc.latitude]}
-                                anchor={{ x: 0.5, y: 0.5 }}
-                                offset={[0, -8]}
-                            >
-                                <Location />
-                            </Marker>
-                        ))}
+                         {Object.entries(runningMates).map(([userId, mate]) => {
+                            const last = mate.coords[mate.coords.length - 1];
+                            if (!last) return null;
+                            return (
+                                <React.Fragment key={userId}>
+                                    {mate.coords.length >= 2 && (
+                                        <GeoJSONSource id={`route-${userId}`} data={toLineString(mate.coords)}>
+                                            <Layer
+                                                id={`routeLine-${userId}`}
+                                                type="line"
+                                                paint={{ lineColor: '#FFC710', lineWidth: 5 }}
+                                                layout={{ lineCap: 'round', lineJoin: 'round' }}
+                                            />
+                                        </GeoJSONSource>
+                                    )}
+                                    <Marker
+                                        id={userId}
+                                        lngLat={[last.longitude, last.latitude]}
+                                        anchor={{ x: 0.5, y: 0.5 }}
+                                        offset={[0, -8]}
+                                    >
+                                        <View className="items-center">
+                                            <Text className="text-white text-[10px] font-heading mb-1">{mate.name}</Text>
+                                            <Location />
+                                        </View>
+                                    </Marker>
+                                </React.Fragment>
+                            );
+                        })}
 
                         {routeCoords.length >= 2 && (
                             <GeoJSONSource id="route" data={toLineString(routeCoords)}>
@@ -258,6 +287,8 @@ export default function SessionMap({ navigation }){
                     <SessionSetup
                         onStart={(cfg) => {
                             setConfig(cfg);
+                            myNameRef.current = cfg.sessionName.trim();
+                            myIdRef.current = `${cfg.sessionName.trim()}-${Math.random().toString(36).slice(2, 7)}`;
                             setSessionStarted(false);
                         }}
                     />

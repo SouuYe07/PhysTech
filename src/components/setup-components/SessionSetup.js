@@ -21,6 +21,7 @@ export default function SessionSetup({ onStart }) {
     const [sessionType, setSessionType] = useState("Solo");
     const [isPublic, setPublic] = useState(true);
     const [sessionName, setSessionName] = useState('');
+    const [nameError, setNameError] = useState(false);
     const [distance, setDistance] = useState('');
     const [time, setTime] = useState('');
     const [keyboardOffset, setKeyboardOffset] = useState(0);  
@@ -36,8 +37,17 @@ export default function SessionSetup({ onStart }) {
     }, []);
 
     const startRun = () => {
+        if (!sessionName.trim()) {
+            setNameError(true);
+            return;
+        }
         onStart({ activity, sessionType, isPublic, sessionName, distance, time });
     }
+
+    const handleNameChange = (value) => {
+        setSessionName(value);
+        if (nameError) setNameError(false);
+    };
 
     return (
         <View style={{
@@ -62,9 +72,8 @@ export default function SessionSetup({ onStart }) {
 
                 <View className="mt-2 gap-y-2">
                     <Dropdown options={ActivityChoices} selected={activity} onSelect={setActivity} />
-                    <SessionType selected={sessionType} onSelect={setSessionType} />
                     <Visibility selected={isPublic} onSelect={setPublic} />
-                    <SessionName selected={sessionName} onSelect={setSessionName} />
+                    <SessionName selected={sessionName} onSelect={handleNameChange} error={nameError} />
                     <Goal
                         distance={distance} onDistanceChange={setDistance}
                         time={time} onTimeChange={setTime}

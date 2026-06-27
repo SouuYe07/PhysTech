@@ -41,7 +41,7 @@ export default function Visibility({ selected, onSelect }){
                             {selected == true ? "Public" : "Private"}                        
                         </Text>
                         <Text className="mt-[-6px] mb-[-4px] font-heading text-[#A6A3A3] text-[12px]">
-                            {selected == true ? "Invite friends only" : "Anyone can see and join"}   
+                            {selected == true ? "Anyone can see and join" : "Invite friends only"}   
                         </Text>
                     </View>
                     <View className="flex-1"/>
