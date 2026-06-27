@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Map, Camera, Marker, GeoJSONSource, Layer } from '@maplibre/maplibre-react-native';
 import { useFocusEffect } from '@react-navigation/native';
@@ -13,6 +13,9 @@ import SessionControls from '../components/SessionControls.js';
 import SessionProgress from '../components/SessionProgress';
 
 import { supabase } from '../lib/supabase';
+
+const MY_USER_ID = 'unis';
+const SESSION_ID = 'test-session-1';
 
 const toLineString = (coords) => ({
         type: 'Feature',
@@ -42,6 +45,8 @@ export default function SessionMap({ navigation }){
     const [paceMinPerKm, setPaceMinPerKm] = useState(0);
     const [routeCoords, setRouteCoords] = useState([]);
     const [currentLocation, setCurrentLocation] = useState(null);
+    const [runningMates, setRunningMates] = useState({});
+    const channelRef = useRef(null);
 
     const onPaused = () => setIsPaused(current => !current);
 
@@ -60,6 +65,8 @@ export default function SessionMap({ navigation }){
         setDistanceKm(0);
         setPaceMinPerKm(0);
         setRouteCoords([]);
+        setRunningMates({});
+
     }
 
     // Intitializes the current location once SessionMap. js is opened
@@ -106,6 +113,30 @@ export default function SessionMap({ navigation }){
 
     // Adding lines to your current user
     useEffect(() => {
+        if (sessionStarted) return;
+
+        const channel = supabase.channel(`session:${SESSION_ID}`);
+        channelRef.current = channel;
+
+        // Receive other users' locations
+        channel.on('broadcast', { event: 'location' }, ({ payload }) => {
+            if (payload.userId === MY_USER_ID) return;
+            console.log('Received from:', payload.userId, payload.latitude, payload.longitude);
+            setRunningMates(prev => ({
+                ...prev,
+                [payload.userId]: { latitude: payload.latitude, longitude: payload.longitude }
+            }));
+        }).subscribe((status) => {
+            console.log('Broadcast status:', status);
+        });
+
+        return () => {
+            supabase.removeChannel(channel);
+            channelRef.current = null;
+        };
+    }, [sessionStarted]);
+
+     useEffect(() => {
         if (sessionStarted || isPaused) return;
 
         let subscription;
@@ -117,6 +148,16 @@ export default function SessionMap({ navigation }){
                     const point = { latitude, longitude };
 
                     setCurrentLocation(point);
+
+                    if (channelRef.current) {
+                        channelRef.current.send({
+                            type: 'broadcast',
+                            event: 'location',
+                            payload: { userId: MY_USER_ID, latitude, longitude }
+                        });
+                        console.log('Broadcasted:', latitude, longitude);
+                    }
+
                     setRouteCoords(prev => {
                         const updated = [...prev, point];
 
@@ -162,6 +203,19 @@ export default function SessionMap({ navigation }){
                         >   
                             <Location />
                         </Marker>
+
+                         {Object.entries(runningMates).map(([userId, loc]) => (
+                            <Marker
+                                key={userId}
+                                id={userId}
+                                lngLat={[loc.longitude, loc.latitude]}
+                                anchor={{ x: 0.5, y: 0.5 }}
+                                offset={[0, -8]}
+                            >
+                                <Location />
+                            </Marker>
+                        ))}
+
                         {routeCoords.length >= 2 && (
                             <GeoJSONSource id="route" data={toLineString(routeCoords)}>
                                 <Layer
