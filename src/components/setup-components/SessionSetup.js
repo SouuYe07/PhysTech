@@ -41,7 +41,8 @@ export default function SessionSetup({ onStart }) {
             setNameError(true);
             return;
         }
-        onStart({ activity, sessionType, isPublic, sessionName, distance, time });
+        // Private sessions are always solo — no sharing with other runners.
+        onStart({ activity, sessionType: isPublic ? sessionType : "Solo", isPublic, sessionName, distance, time });
     }
 
     const handleNameChange = (value) => {

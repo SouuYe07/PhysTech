@@ -51,6 +51,8 @@ export default function SessionMap({ navigation }){
     // myId = name + random suffix (unique, dup-name-proof); myName = what others see.
     const myIdRef = useRef(null);
     const myNameRef = useRef(null);
+    // Private sessions run solo — no broadcasting, no other runners.
+    const isPublicRef = useRef(true);
 
     const onPaused = () => setIsPaused(current => !current);
 
@@ -117,7 +119,8 @@ export default function SessionMap({ navigation }){
 
     // Adding lines to your current user
     useEffect(() => {
-        if (sessionStarted) return;
+        // Skip the shared channel entirely for solo/private sessions.
+        if (sessionStarted || !isPublicRef.current) return;
 
         const channel = supabase.channel(`session:${SESSION_ID}`);
         channelRef.current = channel;
@@ -212,7 +215,16 @@ export default function SessionMap({ navigation }){
                             anchor={{ x: 0.5, y: 0.5 }}
                             offset={[0, -8]}
                         >   
-                            <Location />
+                            <View className="items-center justify-center">
+                                <Location />
+                                <View
+                                    className="absolute items-center"
+                                    style={{ bottom: '100%', left: '50%', marginLeft: -60, width: 120, marginBottom: 4 }}
+                                    pointerEvents="none"
+                                >
+                                    <Text numberOfLines={1} className="text-white text-[10px] font-heading">{myNameRef.current}</Text>
+                                </View>
+                            </View>
                         </Marker>
 
                          {Object.entries(runningMates).map(([userId, mate]) => {
@@ -236,9 +248,15 @@ export default function SessionMap({ navigation }){
                                         anchor={{ x: 0.5, y: 0.5 }}
                                         offset={[0, -8]}
                                     >
-                                        <View className="items-center">
-                                            <Text className="text-white text-[10px] font-heading mb-1">{mate.name}</Text>
-                                            <Location />
+                                        <View className="items-center justify-center">
+                                            <You />
+                                            <View
+                                                className="absolute items-center"
+                                                style={{ bottom: '100%', left: '50%', marginLeft: -60, width: 120, marginBottom: 4 }}
+                                                pointerEvents="none"
+                                            >
+                                                <Text numberOfLines={1} className="text-white text-[10px] font-heading">{mate.name}</Text>
+                                            </View>
                                         </View>
                                     </Marker>
                                 </React.Fragment>
@@ -289,6 +307,7 @@ export default function SessionMap({ navigation }){
                             setConfig(cfg);
                             myNameRef.current = cfg.sessionName.trim();
                             myIdRef.current = `${cfg.sessionName.trim()}-${Math.random().toString(36).slice(2, 7)}`;
+                            isPublicRef.current = cfg.isPublic;
                             setSessionStarted(false);
                         }}
                     />
